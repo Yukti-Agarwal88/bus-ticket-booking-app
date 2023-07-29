@@ -58,7 +58,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                       repeat: true,
                     ),
                     const Text(
-                      'Yeah, you\'re tickets are confirmed..',
+                      'Yeah, you\'re seats are confirmed..',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 24),
                     ),
