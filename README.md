@@ -6,7 +6,7 @@ Mobile Application for both Android & IOS.
 
 To run this app on your local machine, follow these steps:
 
-- Ensure that you have Flutter installed on your machine. If not, follow the Flutter installation guide: Flutter Installation (https://docs.flutter.dev/get-started/install)
+- Ensure that you have Flutter installed on your machine. If not, follow the Flutter installation guide: [Flutter Installation](https://docs.flutter.dev/get-started/install)
 
 - Clone this repository or download the source code as a ZIP file.
 
