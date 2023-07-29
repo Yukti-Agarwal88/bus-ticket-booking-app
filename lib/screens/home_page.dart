@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColor.appBarColor,
+        backgroundColor: AppConstants.appBarColor,
         title: Text('Hi, ${widget.name}'),
         centerTitle: false,
       ),
@@ -85,8 +85,7 @@ class _HomePageState extends State<HomePage> {
                                   hintText: 'Enter',
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 1,
-                                        color: AppColor.grey), //<-- SEE HERE
+                                        width: 1, color: AppConstants.grey),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedBorder: OutlineInputBorder(
@@ -137,8 +136,7 @@ class _HomePageState extends State<HomePage> {
                                   hintText: 'Enter',
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
-                                        width: 1,
-                                        color: Colors.grey), //<-- SEE HERE
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedBorder: OutlineInputBorder(
@@ -184,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                             hintText: 'Enter',
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
-                                  width: 1, color: Colors.grey), //<-- SEE HERE
+                                  width: 1, color: Colors.grey),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
@@ -234,7 +232,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               )),
                         ),
-                        // )
                       ],
                     ),
                   ),

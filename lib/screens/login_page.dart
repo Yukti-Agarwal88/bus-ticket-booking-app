@@ -89,7 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return 'Please enter an Email Address';
                               }
 
-                              // Define the regex pattern for email validation
                               final RegExp emailRegex = RegExp(
                                   r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
 
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 return 'Please enter a valid email address';
                               }
 
-                              return null; // Return null if the email address is valid
+                              return null;
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(

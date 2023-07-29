@@ -1,5 +1,6 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tickets_app/utils/consts.dart';
 
 class SeatReservationScreen extends StatefulWidget {
@@ -44,8 +45,35 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
         ),
       );
     } else {
-      // Perform seat booking logic here.
-      // For simplicity, we're not implementing the actual booking in this example.
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Success'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Lottie.asset(
+                      AppConstants.success,
+                      repeat: true,
+                    ),
+                    const Text(
+                      'Yeah, you\'re tickets are confirmed..',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Done'),
+                ),
+              ],
+            );
+          });
+
       print('Seats booked successfully!');
     }
   }
@@ -54,7 +82,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.appBarColor,
+        backgroundColor: AppConstants.appBarColor,
         title: const Text('Seat Reservation'),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(52),
@@ -114,7 +142,6 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
         ),
       ),
       body: SizedBox(
-        // padding: const EdgeInsets.all(16.0),
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -135,12 +162,10 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                               Radius.circular(20),
                             ),
                             border: Border.all(
-                                color: AppColor.vehicleBorder, width: 2),
+                                color: AppConstants.vehicleBorder, width: 2),
                           ),
                         ),
                         const Spacer(flex: 2),
-                        // 2 below handles
-
                         Container(
                           height: 80,
                           decoration: BoxDecoration(
@@ -148,7 +173,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                               Radius.circular(20),
                             ),
                             border: Border.all(
-                                color: AppColor.vehicleBorder, width: 2),
+                                color: AppConstants.vehicleBorder, width: 2),
                           ),
                         ),
                         const Spacer(),
@@ -161,8 +186,8 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(40),
                         ),
-                        border:
-                            Border.all(color: AppColor.vehicleBorder, width: 2),
+                        border: Border.all(
+                            color: AppConstants.vehicleBorder, width: 2),
                       ),
                       child: ClipRRect(
                         borderRadius: const BorderRadius.all(
@@ -212,7 +237,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                   Text(
                     'Available',
                     style: TextStyle(
-                      color: AppColor.lightGrey,
+                      color: AppConstants.lightGrey,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -224,7 +249,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                   Text(
                     'Selected',
                     style: TextStyle(
-                      color: AppColor.lightGrey,
+                      color: AppConstants.lightGrey,
                     ),
                   ),
                 ],
@@ -240,7 +265,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.pressed)) {
-                          return AppColor.lightGrey;
+                          return AppConstants.lightGrey;
                         }
                         return Colors.blue[800]!;
                       },
@@ -249,7 +274,7 @@ class _SeatReservationScreenState extends State<SeatReservationScreen> {
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
                     child: Text(
-                      'Proceed to payment',
+                      'Confirm your seats',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
