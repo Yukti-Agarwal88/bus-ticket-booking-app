@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tickets_app/screens/seat_area.dart';
+import 'package:tickets_app/screens/seat_reservation_screen.dart';
 import 'package:tickets_app/utils/consts.dart';
 
 class HomePage extends StatefulWidget {

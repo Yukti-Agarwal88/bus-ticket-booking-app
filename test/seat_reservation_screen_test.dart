@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tickets_app/screens/seat_area.dart';
+import 'package:tickets_app/screens/seat_reservation_screen.dart';
 
 void main() {
   group('SeatReservationScreen widget', () {
