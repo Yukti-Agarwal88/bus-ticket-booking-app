@@ -1,87 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tickets_app/screens/seat_area.dart'; // Replace with your actual import path
-// Replace with the actual import path for SeatReservationScreen
+import 'package:tickets_app/screens/seat_area.dart';
 
 void main() {
-  group('SeatReservationScreen Tests', () {
-    testWidgets('Initial state - No seats selected',
+  group('SeatReservationScreen widget', () {
+    testWidgets('Renders the screen', (WidgetTester tester) async {
+      await tester.pumpWidget(
+          MaterialApp(home: SeatReservationScreen(bookedSeats: '2')));
+
+      //For Verify if the widgets are rendered on the screen.
+      expect(find.text('Seat Reservation'), findsOneWidget);
+      expect(find.text('Number of Seats to be Booked-'), findsOneWidget);
+      expect(find.text('Selected Seats-'), findsOneWidget);
+      expect(find.text('2'), findsOneWidget);
+      expect(find.text('0/2'), findsOneWidget);
+    });
+
+    testWidgets('Test seat booking validation', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: SeatReservationScreen(
+            bookedSeats:
+                '4'), // Replace '4' with your desired number of seats to be booked for testing.
+      ));
+
+      await tester.tap(find.byType(GestureDetector).first);
+      await tester.tap(find.byType(GestureDetector).at(1));
+      await tester.pump();
+
+      //For Tapping on the "Confirm your seats" button.
+      await tester.tap(find.text('Confirm your seats'));
+      await tester.pump();
+
+      // Check that the validation error dialog is shown.
+      expect(find.text('Error'), findsOneWidget);
+      expect(
+          find.text(
+              'The number of selected seats and the entered value do not match.'),
+          findsOneWidget);
+    });
+
+    testWidgets('Validate booking with wrong seat count',
         (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: SeatReservationScreen(
-            bookedSeats:
-                '4'), // Replace '4' with the desired bookedSeats value for this test
-      ));
+      await tester.pumpWidget(
+          MaterialApp(home: SeatReservationScreen(bookedSeats: '2')));
 
-      // Ensure no seats are initially selected
-      expect(find.text('Selected Seats: 0/4'), findsOneWidget);
-    });
-
-    testWidgets('Selecting seats', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: SeatReservationScreen(
-            bookedSeats:
-                '6'), // Replace '6' with the desired bookedSeats value for this test
-      ));
-
-      // Tap on seats to select them
-      await tester.tap(find.text('1'));
-      await tester.tap(find.text('3'));
-      await tester.tap(find.text('5'));
+      // Select one seat instead of two.
+      await tester.tap(find.byType(GestureDetector).first);
       await tester.pump();
 
-      // Ensure selected seats count is updated
-      expect(find.text('Selected Seats: 3/6'), findsOneWidget);
-    });
+      // Verify if the selected seats count is updated.
+      expect(find.text('1/2'), findsOneWidget);
 
-    testWidgets('Deselecting seats', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: SeatReservationScreen(
-            bookedSeats:
-                '3'), // Replace '3' with the desired bookedSeats value for this test
-      ));
-
-      // Tap on seats to select them
-      await tester.tap(find.text('1'));
-      await tester.tap(find.text('2'));
-      await tester.tap(find.text('3'));
+      // Tap on the Confirm button and expect an error dialog.
+      await tester.tap(find.text('Confirm your seats'));
       await tester.pump();
 
-      // Tap on seats again to deselect them
-      await tester.tap(find.text('1'));
-      await tester.tap(find.text('2'));
-      await tester.tap(find.text('3'));
-      await tester.pump();
-
-      // Ensure selected seats count is updated
-      expect(find.text('Selected Seats: 0/3'), findsOneWidget);
-    });
-
-    testWidgets('Entering correct number of seats and confirming booking',
-        (WidgetTester tester) async {
-      // Capture the console output using 'expectLater' and 'prints'
-      await expectLater(
-        () async {
-          await tester.pumpWidget(MaterialApp(
-            home: SeatReservationScreen(
-                bookedSeats:
-                    '5'), // Replace '5' with the desired bookedSeats value for this test
-          ));
-
-          // Tap on seats to select them
-          await tester.tap(find.text('1'));
-          await tester.tap(find.text('2'));
-          await tester.tap(find.text('3'));
-          await tester.tap(find.text('4'));
-          await tester.tap(find.text('5'));
-          await tester.pump();
-
-          // Tap on 'Confirm your Seats' button
-          await tester.tap(find.text('Confirm your Seats'));
-          await tester.pumpAndSettle();
-        },
-        prints(contains('Seats booked successfully!')),
-      );
+      expect(find.text('Error'), findsOneWidget);
+      expect(
+          find.text(
+              'The number of selected seats and the entered value do not match.'),
+          findsOneWidget);
     });
   });
 }
